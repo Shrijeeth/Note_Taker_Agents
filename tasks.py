@@ -26,14 +26,22 @@ class NoteTakingTasks:
         return Task(
             description=dedent(
                 f"""
-                **Task**: Prepare detailed notes from given data
-                **Description**: Given a topic, base notes and data related to the topic, you need to create a detailed notes in markdown format. Notes must be split into logical Headings, Sub Headings and relevant source codes accordingly. Your final answer must be a clean and detailed notes in a markdown format strictly.
+                **Task**: Prepare detailed notes from given data and context.
+                **Description**: Given a topic, base notes, and context related to the topic, you need to create detailed notes in markdown format. 
+                
+                Notes must be split into logical Headings, Sub Headings, and relevant source codes accordingly. 
+                
+                Consider base notes as a starting point and improve on top of it. 
+                
+                Your final answer must be a clean and detailed markdown file strictly following this structure.
+                
+                Base Notes must be the truth, and with the context, improve on that. You must provide detailed and well-structured notes.
                 **Parameters**:
-                    - Topic: {topic}
-                    - Base Notes: {base_notes}
+                    - **Topic**: {topic}
+                    - **Base Notes**: {base_notes}
                 **Note**: {self._tip_section()}
                 """
             ),
-            expected_output="Create a error free detailed notes with proper content and sections",
+            expected_output="Create error-free detailed notes with proper content and sections from base notes",
             agent=agent,
         )

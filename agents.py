@@ -49,6 +49,8 @@ class NoteTakerAgents:
                 The notes must be in English and free of gramatical issues.
                 Notes must be in markdown format strictly.
                 Notes must contain all the content from base notes strictly.
+                Notes must be split into logical Headings, Sub Headings and relevant source codes accordingly.
+                Notes must explained in detail and easy to understand.
                 """
             ),
             llm=self.llm,

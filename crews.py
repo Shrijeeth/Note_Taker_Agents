@@ -1,4 +1,4 @@
-from crewai import Crew, Process
+from crewai import Crew, Process, Task
 
 from agents import NoteTakerAgents
 from tasks import NoteTakingTasks
@@ -21,11 +21,13 @@ class NoteTakingCrew:
             self.topic,
             self.base_notes,
         )
-        note_preparation_task = tasks.prepare_detailed_notes(
+        note_preparation_task: Task = tasks.prepare_detailed_notes(
             content_writer_agent,
             self.topic,
             self.base_notes,
         )
+
+        note_preparation_task.context = [raw_data_preparation_task]
 
         crew = Crew(
             agents=[data_collector_agent, content_writer_agent],
