@@ -1,3 +1,5 @@
+# pylint: disable=too-few-public-methods
+
 from crewai import Crew, Process, Task
 
 from agents import NoteTakerAgents
@@ -8,7 +10,7 @@ class NoteTakingCrew:
     def __init__(self, topic, base_notes):
         self.topic = topic
         self.base_notes = base_notes
-    
+
     def run(self):
         agents = NoteTakerAgents()
         tasks = NoteTakingTasks()
@@ -33,7 +35,7 @@ class NoteTakingCrew:
             agents=[data_collector_agent, content_writer_agent],
             tasks=[raw_data_preparation_task, note_preparation_task],
             verbose=True,
-            process=Process.sequential
+            process=Process.sequential,
         )
         result = crew.kickoff()
         return result

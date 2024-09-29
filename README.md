@@ -4,6 +4,7 @@ Basic Note Taking Agents using Local LLM's and CrewAI
 
 ## Requirements
 - Python 3.10+
+- Ollama
 - Virtualenv (Optional)
 
 ## Build Instructions

@@ -1,5 +1,4 @@
-import json
-import os
+# pylint: disable=line-too-long,too-few-public-methods
 
 from googlesearch import search
 from langchain.tools import tool
@@ -14,7 +13,7 @@ class SearchTools:
         """
         top_results_to_return = 5
         results = search(
-            query, 
+            query,
             num_results=top_results_to_return,
             sleep_interval=2,
             advanced=True,
@@ -22,12 +21,14 @@ class SearchTools:
 
         response = []
         for result in results:
-            response.append(f"""
-url: {result.url},
-title: {result.title},
-description: {result.description},
-""")
+            response.append(
+                f"""
+                url: {result.url},
+                title: {result.title},
+                description: {result.description},
+                """
+            )
         if len(response) == 0:
             return "Sorry, I couldn't find anything about the query provided. There could be an error with the search."
-        
+
         return "\n\n".join(response)
