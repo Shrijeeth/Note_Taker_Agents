@@ -1,4 +1,5 @@
 # pylint: disable=line-too-long
+import os
 
 from textwrap import dedent
 from crewai import Agent, LLM
@@ -8,9 +9,15 @@ from tools.search_tools import SearchTools
 
 class NoteTakerAgents:
     def __init__(self):
-        self.llm = LLM(
-            model="ollama/llama3.1",
-            base_url="http://localhost:11434",
+        self.data_collector_llm = LLM(
+            model=os.getenv("DATA_COLLECTOR_MODEL"),
+            base_url=os.getenv("DATA_COLLECTOR_ENDPOINT"),
+            temperature=0.5,
+        )
+
+        self.content_writer_llm = LLM(
+            model=os.getenv("CONTENT_WRITER_MODEL"),
+            base_url=os.getenv("CONTENT_WRITER_ENDPOINT"),
             temperature=0.5,
         )
 
@@ -31,7 +38,7 @@ class NoteTakerAgents:
                 """
             ),
             tools=[SearchTools.search_internet],
-            llm=self.llm,
+            llm=self.data_collector_llm,
             allow_delegation=True,
             verbose=True,
         )
@@ -55,7 +62,7 @@ class NoteTakerAgents:
                 Notes must explained in detail and easy to understand.
                 """
             ),
-            llm=self.llm,
+            llm=self.content_writer_llm,
             allow_delegation=True,
             verbose=True,
         )
